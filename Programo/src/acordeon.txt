@@ -1,0 +1,85 @@
+cls
+help
+db.help
+
+
+use DB_name
+db
+show dbs
+db.dropDatabase()
+
+
+show collections
+
+-- Create Collection
+-- implicit
+db.users.insert({
+
+})
+
+-- Insert Document
+-- explicit
+db.createCollection("products")
+
+-- Delete Collection
+db.products.drop()
+
+-- Edit Document
+db.products.update({
+	"id": 1
+}, {
+	$set: {"amount": 3.4}
+})
+
+
+
+-- Delete Document
+db.products.deteleOne({
+	"id": 1
+})
+
+-- Search Collections
+db.products.find()
+db.products.find().pretty()
+
+----------------------------------
+use shop
+show dbs
+db
+
+db.products.insert({
+	"id": 1,
+	"name": "Shirt",
+	"amount": 20.1,
+	"stock": 4
+})
+
+-- Search
+-- equal  { "amount": 20.1 }
+-- $lt 	  { "amount": {$lt: 20.1} }
+-- $lte
+-- $gt
+-- $gte
+-- $ne
+-- AND 	  { {key1: value1 , key2: value2 }
+-- OR     {
+			$or: [
+				{key1: value1},
+				{key2: value2}
+			]
+		  }
+-- AND + OR 
+		   {
+			  key1: value1,
+			  $or: [ { key2: {$lt: value2}, {key3: value3}} ]
+		   }
+
+db.products.find({
+	"amount": 20.1
+})
+
+db.products.find().pretty().limit(1)
+
+-- 1: De menor a mayor
+-- -1: De mayor a menor
+db.products.find().sort({amount: 1})
